@@ -52,4 +52,12 @@ export class TodoItemComponent implements OnInit {
       })
     );
   }
+
+  borrar(){
+    this.store.dispatch(
+      actions.borrar({
+        id:this.todo.id
+      })
+    );
+  }
 }
