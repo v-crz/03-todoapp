@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { borrar, crear, editar, toggle } from './todo.actions';
+import { borrar, crear, editar, toggle, toggleAll } from './todo.actions';
 
 export const estadoInicial: Todo[] = [
     new Todo('Salvar al mundo'),
@@ -40,5 +40,13 @@ export const todoReducer = createReducer(estadoInicial,
     }),
     on(borrar, (state, {id}) => 
         state.filter(todo => todo.id != id)
+    ),
+    on(toggleAll, (state, {completado}) => 
+        state.map(todo => {
+            return {
+                ...todo,
+                completado: completado
+            }
+        })
     )
 );
